@@ -1,0 +1,16 @@
+[remap]
+
+importer="citizenl.godot-csv-importer"
+type="Resource"
+uid="uid://fofdj4bwydyx"
+path="res://.godot/imported/example.csv-146749070d65fe1763029076c80f6dbd.res"
+
+[deps]
+
+source_file="res://assets/example.csv"
+dest_files=["res://.godot/imported/example.csv-146749070d65fe1763029076c80f6dbd.res"]
+
+[params]
+
+delimiter=0
+describe_headers=true
