@@ -6,6 +6,8 @@ Using CSV files as game data configuration tables in Godot is inspired by the [g
 func _ready():
     var example = preload("res://assets/example.csv").setup()
     var shooter = example.fetch(1)#fetch row data by primary key, here is 1
+    print(shooter)
+    #{ "id": 1, "name": "Shooter", "speed": 100, "max_speed": 150, " damage": 10, " crit": 0.5, "items": [1, 1, 2, { "foo": 1, "bar": 2 }, "test"] }
 ```
 
 ### Example.csv
