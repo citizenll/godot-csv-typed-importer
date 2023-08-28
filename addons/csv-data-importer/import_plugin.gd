@@ -26,7 +26,7 @@ func _get_recognized_extensions():
 
 
 func _get_save_extension():
-	return "res"
+	return "tres"
 
 
 func _get_resource_type():
@@ -85,10 +85,9 @@ func _import(source_file, save_path, options, platform_variants, gen_files):
 			continue
 		lines.append_row(row)
 	file.close()
-
-	var data = preload("csv_data.gd").new()
+	# do not setup here
+	var data = preload("csv_data.gd").new(false)
 	var rows = lines.get_data()
-
 	data.records = rows
 	data.headers = meta.headers
 

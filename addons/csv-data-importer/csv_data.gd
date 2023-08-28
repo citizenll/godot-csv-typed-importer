@@ -1,9 +1,24 @@
 extends Resource
 
-@export var headers := []  #column name
-@export var records := []  #origin data
+ ## column name
+@export var headers := []
+## origin data
+@export var records := [] :
+	set(v):
+		records = v
+		if _auto_setup:
+			setup()
 
 var _data:= {}  #column name to index
+var _auto_setup = false
+## _data getter
+var data:
+	get:
+		return _data
+
+func _init(auto_setup = true):
+	_auto_setup = auto_setup
+
 
 func setup():
 	var field_indexs = {}
@@ -27,3 +42,7 @@ func setup():
 
 func fetch(primary_key):
 	return _data.get(str(primary_key))
+
+
+func keys():
+	return _data.keys()
