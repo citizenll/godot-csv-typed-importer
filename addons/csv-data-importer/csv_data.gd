@@ -11,6 +11,7 @@ extends Resource
 
 var _data:= {}  #column name to index
 var _auto_setup = false
+var _initialed = false
 ## _data getter
 var data:
 	get:
@@ -21,6 +22,10 @@ func _init(auto_setup = true):
 
 
 func setup():
+    if _initialed:
+        push_warn(">_< csv file already setuped !")
+        return self
+    _initialed = true
 	var field_indexs = {}
 	for i in range(headers.size()):
 		field_indexs[headers[i]] = i
