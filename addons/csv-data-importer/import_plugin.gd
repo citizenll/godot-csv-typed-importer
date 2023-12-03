@@ -77,7 +77,7 @@ func _import(source_file, save_path, options, platform_variants, gen_files):
 
 	var lines := Array2D.new()
 
-	var meta = _parse_headers(file, options)
+	var meta = _parse_headers(file, options,delim)
 	while not file.eof_reached():
 		var line = file.get_csv_line(delim)
 		var row = _parse_typed(line, meta.headers, meta.field_types)
@@ -86,7 +86,7 @@ func _import(source_file, save_path, options, platform_variants, gen_files):
 		lines.append_row(row)
 	file.close()
 	# do not setup here
-	var data = preload("csv_data.gd").new(false)
+	var data = preload("csv_data.gd").new()
 	var rows = lines.get_data()
 	data.records = rows
 	data.headers = meta.headers
@@ -98,13 +98,13 @@ func _import(source_file, save_path, options, platform_variants, gen_files):
 	return err
 
 
-func _parse_headers(f: FileAccess, options):
+func _parse_headers(f: FileAccess, options,delim):
 	var model_name = ""
 	if options.describe_headers:
-		var _desc = f.get_csv_line()
+		var _desc = f.get_csv_line(delim)
 		model_name= _desc[0]
-	var headers = f.get_csv_line()
-	var types = f.get_csv_line()
+	var headers = f.get_csv_line(delim)
+	var types = f.get_csv_line(delim)
 	#
 	var field_indexs = {}
 	var field_types = {}
@@ -153,6 +153,7 @@ func _parse_typed_value(p_value: String, p_type: String):
 		"json":
 			if p_value.is_empty():
 				p_value = "[]"
+			p_value = p_value.replace("`", "\"")
 			return str_to_var(p_value)
 		_:
 			push_error("can not parse type ", p_type)
