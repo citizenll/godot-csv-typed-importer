@@ -80,14 +80,18 @@ func _import(source_file, save_path, options, platform_variants, gen_files):
 	var meta = _parse_headers(file, options,delim)
 	while not file.eof_reached():
 		var line = file.get_csv_line(delim)
+		
 		var row = _parse_typed(line, meta.headers, meta.field_types)
 		if row==null or not row.size():
+			push_warning("[csv-importer]:csv row data null ",line)
 			continue
 		lines.append_row(row)
+		
 	file.close()
+	
 	# do not setup here
-	var data = preload("csv_data.gd").new()
-	var rows = lines.get_data()
+	var data = preload("csv_data.gd").new(false)
+	var rows = lines.get_data() 
 	data.records = rows
 	data.headers = meta.headers
 
@@ -123,7 +127,7 @@ func _parse_headers(f: FileAccess, options,delim):
 func _parse_typed(csv_row: PackedStringArray, headers:PackedStringArray, types):
 	var column = headers.size()
 	if csv_row.size() != column:
-		push_warning("[csv-importer]:csv row data not enough ",csv_row)
+		push_warning("[csv-importer]:csv row data not enough ",column," - > ",csv_row.size()," = ",csv_row)
 		return []
 	var row = []
 	for i in range(headers.size()):

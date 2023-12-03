@@ -17,15 +17,15 @@ var data:
 	get:
 		return _data
 
-func _init(auto_setup = true):
+func _init(auto_setup = false):
 	_auto_setup = auto_setup
 
 
 func setup():
-    if _initialed:
-        push_warn(">_< csv file already setuped !")
-        return self
-    _initialed = true
+	if _initialed:
+		push_warning(">_< csv file already setuped !")
+		return self
+	_initialed = true
 	var field_indexs = {}
 	for i in range(headers.size()):
 		field_indexs[headers[i]] = i
