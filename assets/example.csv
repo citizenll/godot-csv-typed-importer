@@ -1,4 +1,4 @@
-CharacterConfig,Name,Speed,MaxSpeed,Damag,Crit,Items
-id,name,speed,max_speed, damage, crit,items
-int,str,int,int,int,float,json
-1,Shooter,100,150,10,0.5,"[1,1,2,{""foo"":1, ""bar"":2},""test""]"
+CharacterConfig;Name;Speed;MaxSpeed;Damag;Crit;Items
+id;name;speed;max_speed; damage; crit;items
+int;str;int;int;int;float;json
+1;Shooter;100;150;10;0.5;"[1,1,2,{""foo"":1, ""bar"":2},""test""]"

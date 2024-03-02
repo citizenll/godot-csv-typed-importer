@@ -2,7 +2,7 @@
 extends EditorImportPlugin
 
 enum Presets { CSV }
-enum Delimiters { COMMA, TAB }
+enum Delimiters { COMMA, TAB, SEMICOLON }
 
 const ALLOW_TYPES = ["str", "int", "float", "bool", "json"]
 
@@ -49,7 +49,7 @@ func _get_import_options(_path, preset):
 	var delimiter = Delimiters.COMMA
 	var headers = true
 	return [
-		{name="delimiter", default_value=delimiter, property_hint=PROPERTY_HINT_ENUM, hint_string="Comma,Tab"},
+		{name="delimiter", default_value=delimiter, property_hint=PROPERTY_HINT_ENUM, hint_string="Comma,Tab, Semicolon"},
 		{name="describe_headers", default_value=headers},
 	]
 
@@ -68,6 +68,8 @@ func _import(source_file, save_path, options, platform_variants, gen_files):
 			delim = ","
 		Delimiters.TAB:
 			delim = "\t"
+		Delimiters.SEMICOLON:
+			delim = ";"
 
 	var file = FileAccess.open(source_file, FileAccess.READ)
 	

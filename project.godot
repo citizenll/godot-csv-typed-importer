@@ -11,7 +11,8 @@ config_version=5
 [application]
 
 config/name="godot-csv-typed-importer"
-config/features=PackedStringArray("4.0", "Mobile")
+run/main_scene="res://demo.tscn"
+config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
 
 [editor_plugins]
